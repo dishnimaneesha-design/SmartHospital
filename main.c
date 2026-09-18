@@ -7,7 +7,6 @@ int main()
     printf("========================================\n");
 
     int specialtyID[4] = {1, 2, 3, 4};
-
     char specialtyName[4][30] = {
         "General Practice",
         "Paediatrics",
@@ -26,6 +25,25 @@ int main()
         15, 20, 30, 30
     };
 
+    int wardID[4]={1,2,3,4};
+    char wardName[4][30]={
+        "General Ward",
+        "Paediatric Ward",
+        "Surgical Ward",
+        "ICU"
+    };
+    float wardDailyRate[4]={
+        3000.00,
+        6000.00,
+        12000.00,
+        25000.00
+
+    };
+
+    int wardCapacity[4] = {
+    20, 10, 10, 5
+    };
+
     int dailyCapacity[4] = {
         30, 20, 12, 10
     };
@@ -41,6 +59,16 @@ int main()
                consultationTime[i],
                dailyCapacity[i]);
     }
+    printf("\nHospital Wards:\n");
+    for (int i=0;i<4;i++){
+        printf("%d.%s-LKR%.2f/day - Capacity %d\n",
+               wardID[i],
+               wardName[i],
+               wardDailyRate[i],
+               wardCapacity[i]);
+
+    }
+
 
 
     return 0;
