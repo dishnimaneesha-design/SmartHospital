@@ -45,7 +45,7 @@ int main()
     20, 10, 10, 5
     };
     int bedOccupancy[4][20] = {0};
-    int patienID[MAX_PATIENTS];
+    int patientID[MAX_PATIENTS];
     char patientName[MAX_PATIENTS][50];
     int patientAge[MAX_PATIENTS];
     int urgencyLevel[MAX_PATIENTS];//1 Normal , 2 Urgent , 3 Critical
@@ -93,9 +93,33 @@ int main()
         }
     }
     printf("\nPatient data arrays initialized successfully.\n");
+    printf("\n========== PATIENT REGISTRATION ==========\n");
 
+    printf("Enter patient name: ");
+    scanf(" %[^\n]", patientName[patientCount]);
+    printf("Enter age: ");
+    scanf("%d", &patientAge[patientCount]);
+    printf("Enter urgency level (1-Normal, 2-Urgent, 3-Critical): ");
+    scanf("%d", &urgencyLevel[patientCount]);
+    printf("Enter specialty ID (1-4): ");
+    scanf("%d", &patientSpecialty[patientCount]);
+    printf("Is the patient admitted? (1-Yes, 0-No): ");
+    scanf("%d", &isAdmitted[patientCount]);
 
+    if(isAdmitted[patientCount]==1){
+            printf("Enter ward ID (1-4): ");
+            scanf("%d", &patientWard[patientCount]);
 
+            printf("Enter number of admitted days: ");
+            scanf("%d", &daysAdmitted[patientCount]);
+
+    }else{
+        patientWard[patientCount] = 0;
+        daysAdmitted[patientCount] = 0;
+    }
+    patientID[patientCount] = 1001 + patientCount;
+    patientCount++;
+    printf("\nPatient registered successfully!\n");
 
     return 0;
 }
