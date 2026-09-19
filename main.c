@@ -101,8 +101,20 @@ int main()
     scanf("%d", &patientAge[patientCount]);
     printf("Enter urgency level (1-Normal, 2-Urgent, 3-Critical): ");
     scanf("%d", &urgencyLevel[patientCount]);
-    printf("Enter specialty ID (1-4): ");
-    scanf("%d", &patientSpecialty[patientCount]);
+    //printf("Enter specialty ID (1-4): ");
+    //scanf("%d", &patientSpecialty[patientCount]);
+    do{
+        printf("Enter specialty ID (1-4): ");
+        scanf("%d", &patientSpecialty[patientCount]);
+        if (patientSpecialty[patientCount] < 1 ||
+            patientSpecialty[patientCount] > 4)
+        {
+            printf("Invalid specialty ID. Please enter 1-4.\n");
+        }
+
+    }while (patientSpecialty[patientCount] < 1 ||
+            patientSpecialty[patientCount] > 4);
+
     printf("Is the patient admitted? (1-Yes, 0-No): ");
     scanf("%d", &isAdmitted[patientCount]);
 
@@ -117,7 +129,16 @@ int main()
         patientWard[patientCount] = 0;
         daysAdmitted[patientCount] = 0;
     }
+
     patientID[patientCount] = 1001 + patientCount;
+    printf("\nSelected Specialty: %s\n",
+           specialtyName[patientSpecialty[patientCount] - 1]);
+
+    printf("Consultation Fee: LKR %.2f\n",
+           consultationFee[patientSpecialty[patientCount] - 1]);
+
+    printf("Consultation Time: %d minutes\n",
+           consultationTime[patientSpecialty[patientCount] - 1]);
     patientCount++;
     printf("\nPatient registered successfully!\n");
 
