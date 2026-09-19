@@ -1,6 +1,22 @@
 #include <stdio.h>
 #define MAX_PATIENTS 100
 
+float calculateSurcharge(float baseFee, int urgency)
+{
+    if (urgency == 1)
+    {
+        return 0;
+    }
+    else if (urgency == 2)
+    {
+        return baseFee * 0.20;
+    }
+    else
+    {
+        return baseFee * 0.50;
+    }
+}
+
 int main()
 {
     printf("========================================\n");
@@ -148,7 +164,7 @@ int main()
             }
         }
         if (bedFound == 0){
-            printf("No available bed in this ward.\n");
+            printf("No beds are currently available in this ward.\n");
         }
 
     }else{
@@ -159,6 +175,25 @@ int main()
     patientID[patientCount] = 1001 + patientCount;
     printf("\nSelected Specialty: %s\n",
            specialtyName[patientSpecialty[patientCount] - 1]);
+
+
+   float baseFee;
+   float emergencySurcharge;
+
+   baseFee = consultationFee[patientSpecialty[patientCount] - 1];
+
+   emergencySurcharge = calculateSurcharge(
+       baseFee,
+       urgencyLevel[patientCount]
+   );
+
+   printf("Emergency Surcharge: LKR %.2f\n",
+          emergencySurcharge);
+
+
+
+
+
 
     printf("Consultation Fee: LKR %.2f\n",
            consultationFee[patientSpecialty[patientCount] - 1]);
