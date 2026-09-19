@@ -23,6 +23,28 @@ float calculateWardCost(float dailyRate,int days)
     return dailyRate * days;
 }
 
+void sortPatientsByPriority(int urgency[], int patientIDs[], int count)
+{
+    int i, j;
+    int tempUrgency;
+    int tempID;
+
+    for (i = 0; i < count - 1; i++){
+        for (j = 0; j < count - i - 1; j++){
+            if (urgency[j] < urgency[j + 1]){
+                tempUrgency = urgency[j];
+                urgency[j] = urgency[j + 1];
+                urgency[j + 1] = tempUrgency;
+
+                tempID = patientIDs[j];
+                patientIDs[j] = patientIDs[j + 1];
+                patientIDs[j + 1] = tempID;
+            }
+        }
+    }
+}
+
+
 int main()
 {
     printf("========================================\n");
@@ -243,6 +265,7 @@ int main()
 
     patientCount++;
     printf("\nPatient registered successfully!\n");
+    printf("\nPriority sorting function added successfully.\n");
 
     return 0;
 }
