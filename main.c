@@ -1,4 +1,5 @@
 #include <stdio.h>
+#define MAX_PATIENTS 100
 
 int main()
 {
@@ -44,6 +45,15 @@ int main()
     20, 10, 10, 5
     };
     int bedOccupancy[4][20] = {0};
+    int patienID[MAX_PATIENTS];
+    char patientName[MAX_PATIENTS][50];
+    int patientAge[MAX_PATIENTS];
+    int urgencyLevel[MAX_PATIENTS];//1 Normal , 2 Urgent , 3 Critical
+    int patientSpecialty[MAX_PATIENTS]; //Doctor specialty
+    int isAdmitted[MAX_PATIENTS];//1 = admitted, 0 = not admitted
+    int patientWard[MAX_PATIENTS];
+    int daysAdmitted[MAX_PATIENTS];
+    int patientCount = 0;
 
     int dailyCapacity[4] = {
         30, 20, 12, 10
@@ -82,6 +92,7 @@ int main()
 
         }
     }
+    printf("\nPatient data arrays initialized successfully.\n");
 
 
 
