@@ -23,6 +23,18 @@ float calculateWardCost(float dailyRate,int days)
     return dailyRate * days;
 }
 
+float calculateAgeDiscount(float grossTotal, int age)
+{
+    if (age < 5 || age > 65)
+    {
+        return grossTotal * 0.15;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
 void sortPatientsByPriority(int urgency[], int patientIDs[], int count)
 {
     int i, j;
@@ -229,6 +241,18 @@ int main()
     float grossTotal = baseFee + emergencySurcharge + wardCost;
     printf("Gross Total: LKR %.2f\n", grossTotal);
 
+    float ageDiscount;
+    float finalPayable;
+
+    ageDiscount = calculateAgeDiscount(
+         grossTotal,
+         patientAge[patientCount]
+    );
+
+    finalPayable = grossTotal - ageDiscount;
+
+    printf("Age Subsidy Discount: LKR %.2f\n", ageDiscount);
+    printf("Final Payable Amount: LKR %.2f\n", finalPayable);
 
     patientID[patientCount] = 1001 + patientCount;
     printf("\nSelected Specialty: %s\n",
