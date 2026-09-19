@@ -58,6 +58,8 @@ int main()
     int dailyCapacity[4] = {
         30, 20, 12, 10
     };
+    int specialtyQueue[4] = {0, 0, 0, 0};
+    int waitingTime = 0;
 
     printf("\nDoctor Specialties:\n");
 
@@ -119,11 +121,35 @@ int main()
     scanf("%d", &isAdmitted[patientCount]);
 
     if(isAdmitted[patientCount]==1){
+        do{
+
             printf("Enter ward ID (1-4): ");
             scanf("%d", &patientWard[patientCount]);
+            if(patientWard[patientCount] < 1 ||
+               patientWard[patientCount] > 4){
+                    printf("Invalid ward ID. Please enter 1-4.\n");
+               }
+        }while (patientWard[patientCount] < 1 ||
+                patientWard[patientCount] > 4);
+        printf("Enter number of admitted days: ");
+        scanf("%d", &daysAdmitted[patientCount]);
+        int wardIndex = patientWard[patientCount] - 1;
+        int bedFound = 0;
 
-            printf("Enter number of admitted days: ");
-            scanf("%d", &daysAdmitted[patientCount]);
+        for (int j = 0; j < wardCapacity[wardIndex]; j++){
+            if (bedOccupancy[wardIndex][j] == 0){
+                 bedOccupancy[wardIndex][j] = 1;
+
+                 printf("Bed allocated: %s - Bed %02d\n",
+                        wardName[wardIndex], j + 1);
+
+                 bedFound = 1;
+                 break;
+            }
+        }
+        if (bedFound == 0){
+            printf("No available bed in this ward.\n");
+        }
 
     }else{
         patientWard[patientCount] = 0;
@@ -139,6 +165,13 @@ int main()
 
     printf("Consultation Time: %d minutes\n",
            consultationTime[patientSpecialty[patientCount] - 1]);
+
+    int selectedSpecialty = patientSpecialty[patientCount] - 1;
+    waitingTime = specialtyQueue[selectedSpecialty]
+              * consultationTime[selectedSpecialty];
+    printf("Estimated Waiting Time: %d minutes\n", waitingTime);
+    specialtyQueue[selectedSpecialty]++;
+
     patientCount++;
     printf("\nPatient registered successfully!\n");
 
