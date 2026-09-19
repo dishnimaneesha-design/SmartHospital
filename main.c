@@ -164,7 +164,7 @@ int main()
             if (bedOccupancy[wardIndex][j] == 0){
                  bedOccupancy[wardIndex][j] = 1;
 
-                 printf("Bed allocated: %s - Bed %02d\n",
+                 printf("\nBed allocated: %s - Bed %02d\n",
                         wardName[wardIndex], j + 1);
 
                  bedFound = 1;
@@ -186,33 +186,49 @@ int main()
     {
         wardCost = calculateWardCost(
             wardDailyRate[patientWard[patientCount] - 1],
-            daysAdmitted[patientCount]
-        );
+            daysAdmitted[patientCount]);
     }
+    printf("\nWard Stay Cost: LKR %.2f\n", wardCost);
 
-    printf("Ward Stay Cost: LKR %.2f\n", wardCost);
+
+    float baseFee;
+    float emergencySurcharge;
+    baseFee = consultationFee[patientSpecialty[patientCount] - 1];
+
+    emergencySurcharge = calculateSurcharge(
+       baseFee,
+       urgencyLevel[patientCount]
+    );
+
+    printf("Base Consultation Fee: LKR %.2f\n", baseFee);
+    printf("Emergency Surcharge: LKR %.2f\n",
+           emergencySurcharge);
+
+    float grossTotal = baseFee + emergencySurcharge + wardCost;
+    printf("Gross Total: LKR %.2f\n", grossTotal);
+
 
     patientID[patientCount] = 1001 + patientCount;
     printf("\nSelected Specialty: %s\n",
            specialtyName[patientSpecialty[patientCount] - 1]);
 
 
-   float baseFee;
-   float emergencySurcharge;
+   //float baseFee;
+   //float emergencySurcharge;
 
-   baseFee = consultationFee[patientSpecialty[patientCount] - 1];
+   //baseFee = consultationFee[patientSpecialty[patientCount] - 1];
 
-   emergencySurcharge = calculateSurcharge(
-       baseFee,
-       urgencyLevel[patientCount]
-   );
+   //emergencySurcharge = calculateSurcharge(
+     //  baseFee,
+     //  urgencyLevel[patientCount]
+   //);
 
-    printf("Emergency Surcharge: LKR %.2f\n",
-           emergencySurcharge);
+    //printf("Emergency Surcharge: LKR %.2f\n",
+      //     emergencySurcharge);
 
 
-    printf("Consultation Fee: LKR %.2f\n",
-           consultationFee[patientSpecialty[patientCount] - 1]);
+    //printf("Consultation Fee: LKR %.2f\n",
+      //     consultationFee[patientSpecialty[patientCount] - 1]);
 
     printf("Consultation Time: %d minutes\n",
            consultationTime[patientSpecialty[patientCount] - 1]);
