@@ -3,18 +3,24 @@
 
 float calculateSurcharge(float baseFee, int urgency)
 {
-    if (urgency == 1)
-    {
+    if (urgency == 1){
         return 0;
     }
-    else if (urgency == 2)
-    {
+    else if (urgency == 2){
         return baseFee * 0.20;
     }
-    else
-    {
+    else{
         return baseFee * 0.50;
     }
+}
+
+
+float calculateWardCost(float dailyRate,int days)
+{
+    if (days == 0){
+        return 0;
+    }
+    return dailyRate * days;
 }
 
 int main()
@@ -54,7 +60,6 @@ int main()
         6000.00,
         12000.00,
         25000.00
-
     };
 
     int wardCapacity[4] = {
@@ -97,6 +102,9 @@ int main()
                wardCapacity[i]);
 
     }
+
+
+
     printf("\nBed Occupancy:\n");
     for(int i=0;i<4;i++){
         printf("\n%s:\n",wardName[i]);
@@ -172,6 +180,18 @@ int main()
         daysAdmitted[patientCount] = 0;
     }
 
+    float wardCost = 0;
+
+    if (isAdmitted[patientCount] == 1)
+    {
+        wardCost = calculateWardCost(
+            wardDailyRate[patientWard[patientCount] - 1],
+            daysAdmitted[patientCount]
+        );
+    }
+
+    printf("Ward Stay Cost: LKR %.2f\n", wardCost);
+
     patientID[patientCount] = 1001 + patientCount;
     printf("\nSelected Specialty: %s\n",
            specialtyName[patientSpecialty[patientCount] - 1]);
@@ -187,12 +207,8 @@ int main()
        urgencyLevel[patientCount]
    );
 
-   printf("Emergency Surcharge: LKR %.2f\n",
-          emergencySurcharge);
-
-
-
-
+    printf("Emergency Surcharge: LKR %.2f\n",
+           emergencySurcharge);
 
 
     printf("Consultation Fee: LKR %.2f\n",
@@ -200,6 +216,8 @@ int main()
 
     printf("Consultation Time: %d minutes\n",
            consultationTime[patientSpecialty[patientCount] - 1]);
+
+
 
     int selectedSpecialty = patientSpecialty[patientCount] - 1;
     waitingTime = specialtyQueue[selectedSpecialty]
