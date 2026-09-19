@@ -43,6 +43,7 @@ int main()
     int wardCapacity[4] = {
     20, 10, 10, 5
     };
+    int bedOccupancy[4][20] = {0};
 
     int dailyCapacity[4] = {
         30, 20, 12, 10
@@ -68,6 +69,20 @@ int main()
                wardCapacity[i]);
 
     }
+    printf("\nBed Occupancy:\n");
+    for(int i=0;i<4;i++){
+        printf("\n%s:\n",wardName[i]);
+        for(int j=0;j<wardCapacity[i];j++){
+            if(bedOccupancy[i][j]==0){
+                printf("Bed %02d : Available\n",j+1);
+            }else{
+                printf("Bed %02d : Occupied\n", j + 1);
+
+            }
+
+        }
+    }
+
 
 
 
