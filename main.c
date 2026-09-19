@@ -67,19 +67,6 @@ int main()
     printf("========================================\n");
 
     int choice;
-    do
-    {
-
-        printf("\n========== SMART HOSPITAL MENU ==========\n");
-        printf("1. Register Patient\n");
-        printf("2. Exit\n");
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
-
-        if (choice == 1)
-    {
-
-
     int specialtyID[4] = {1, 2, 3, 4};
     char specialtyName[4][30] = {
         "General Practice",
@@ -132,6 +119,72 @@ int main()
     };
     int specialtyQueue[4] = {0, 0, 0, 0};
     int waitingTime = 0;
+
+    do
+    {
+
+        printf("\n========== SMART HOSPITAL MENU ==========\n");
+        printf("1. Register Patient\n");
+        printf("2. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        if (choice == 1)
+    {
+
+
+    /*int specialtyID[4] = {1, 2, 3, 4};
+    char specialtyName[4][30] = {
+        "General Practice",
+        "Paediatrics",
+        "Cardiology",
+        "Neurology"
+    };
+
+    float consultationFee[4] = {
+        1500.00,
+        2500.00,
+        4500.00,
+        5000.00
+    };
+
+    int consultationTime[4] = {
+        15, 20, 30, 30
+    };
+
+    int wardID[4]={1,2,3,4};
+    char wardName[4][30]={
+        "General Ward",
+        "Paediatric Ward",
+        "Surgical Ward",
+        "ICU"
+    };
+    float wardDailyRate[4]={
+        3000.00,
+        6000.00,
+        12000.00,
+        25000.00
+    };
+
+    int wardCapacity[4] = {
+    20, 10, 10, 5
+    };
+    int bedOccupancy[4][20] = {0};
+    int patientID[MAX_PATIENTS];
+    char patientName[MAX_PATIENTS][50];
+    int patientAge[MAX_PATIENTS];
+    int urgencyLevel[MAX_PATIENTS];//1 Normal , 2 Urgent , 3 Critical
+    int patientSpecialty[MAX_PATIENTS]; //Doctor specialty
+    int isAdmitted[MAX_PATIENTS];//1 = admitted, 0 = not admitted
+    int patientWard[MAX_PATIENTS];
+    int daysAdmitted[MAX_PATIENTS];
+    int patientCount = 0;
+
+    int dailyCapacity[4] = {
+        30, 20, 12, 10
+    };
+    int specialtyQueue[4] = {0, 0, 0, 0};
+    int waitingTime = 0;*/
 
     printf("\nDoctor Specialties:\n");
 
