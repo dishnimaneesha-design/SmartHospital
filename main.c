@@ -59,9 +59,26 @@ void sortPatientsByPriority(int urgency[], int patientIDs[], int count)
 
 int main()
 {
+    char again;
+
+
     printf("========================================\n");
     printf("       SMART HOSPITAL SYSTEM\n");
     printf("========================================\n");
+
+    int choice;
+    do
+    {
+
+        printf("\n========== SMART HOSPITAL MENU ==========\n");
+        printf("1. Register Patient\n");
+        printf("2. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        if (choice == 1)
+    {
+
 
     int specialtyID[4] = {1, 2, 3, 4};
     char specialtyName[4][30] = {
@@ -290,6 +307,44 @@ int main()
     patientCount++;
     printf("\nPatient registered successfully!\n");
     printf("\nPriority sorting function added successfully.\n");
+    }
+
+
+    if (choice == 1)
+    {
+        printf("\nDo you want to register another patient? (Y/N): ");
+        scanf(" %c", &again);
+
+        if (again == 'N' || again == 'n')
+        {
+            choice = 2;
+        }
+    }
+
+  } while (choice != 2);
+
+  printf("Exiting system...\n");
+
+return 0;
+}
+    /*printf("\nDo you want to register another patient? (Y/N): ");
+    scanf(" %c", &again);
+
+    if (again == 'N' || again == 'n')
+    {
+        choice = 2;
+    }
+
+    else if (choice == 2)
+    {
+        printf("Exiting system...\n");
+    }
+    else
+    {
+        printf("Invalid choice. Please try again.\n");
+    }
+
+
 
     return 0;
-}
+}*/
