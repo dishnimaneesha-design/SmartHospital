@@ -214,8 +214,19 @@ int main()
 
     printf("Enter patient name: ");
     scanf(" %[^\n]", patientName[patientCount]);
+    do{
     printf("Enter age: ");
     scanf("%d", &patientAge[patientCount]);
+
+    if (patientAge[patientCount] < 0 ||
+        patientAge[patientCount] > 120)
+    {
+        printf("Invalid age. Please enter an age between 0 and 120.\n");
+    }
+
+  } while (patientAge[patientCount] < 0 ||
+           patientAge[patientCount] > 120);
+
     printf("Enter urgency level (1-Normal, 2-Urgent, 3-Critical): ");
     scanf("%d", &urgencyLevel[patientCount]);
 
