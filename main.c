@@ -45,6 +45,7 @@ void sortPatientsByPriority(
                             int isAdmitted[],
                             int patientWards[],
                             int daysAdmitted[],
+                            float patientFinalPayable[],
                             int count)
 {
     int i, j;
@@ -56,6 +57,7 @@ void sortPatientsByPriority(
     int tempAdmitted;
     int tempWard;
     int tempDays;
+    float tempFinalPayable;
 
     for (i = 0; i < count - 1; i++){
         for (j = 0; j < count - i - 1; j++){
@@ -83,6 +85,9 @@ void sortPatientsByPriority(
                 tempDays = daysAdmitted[j];
                 daysAdmitted[j] = daysAdmitted[j + 1];
                 daysAdmitted[j + 1] = tempDays;
+                tempFinalPayable = patientFinalPayable[j];
+                patientFinalPayable[j] = patientFinalPayable[j + 1];
+                patientFinalPayable[j + 1] = tempFinalPayable;
                 tempUrgency = urgency[j];
                 urgency[j] = urgency[j + 1];
                 urgency[j + 1] = tempUrgency;
@@ -215,11 +220,10 @@ int main()
 
         }
     }
-    printf("\nPatient data arrays initialized successfully.\n");
     printf("\n========== PATIENT REGISTRATION ==========\n");
 
     printf("Enter patient name: ");
-    scanf(" %[^\n]", patientName[patientCount]);
+    scanf(" %49[^\n]", patientName[patientCount]);
     do{
     printf("Enter age: ");
     scanf("%d", &patientAge[patientCount]);
@@ -232,9 +236,17 @@ int main()
 
   } while (patientAge[patientCount] < 0 ||
            patientAge[patientCount] > 120);
-
+  do{
     printf("Enter urgency level (1-Normal, 2-Urgent, 3-Critical): ");
     scanf("%d", &urgencyLevel[patientCount]);
+    if (urgencyLevel[patientCount] < 1 ||
+        urgencyLevel[patientCount] > 3)
+    {
+        printf("Invalid urgency level. Please enter 1-3.\n");
+    }
+
+  } while (urgencyLevel[patientCount] < 1 ||
+           urgencyLevel[patientCount] > 3);
 
     do{
         printf("Enter specialty ID (1-4): ");
@@ -367,7 +379,6 @@ int main()
 
     patientCount++;
     printf("\nPatient registered successfully!\n");
-    printf("\nPriority sorting function added successfully.\n");
 
  do{
     printf("\nDo you want to register another patient? (Y/N): ");
@@ -381,9 +392,7 @@ int main()
  } while (again != 'Y' && again != 'y' &&
          again != 'N' && again != 'n');
 
-    if (again == 'N' || again == 'n'){
-        choice = 3;
-    }
+
     }
     else if (choice == 2){
         printf("\n========== REGISTERED PATIENTS ==========\n");
@@ -400,6 +409,7 @@ int main()
                                    isAdmitted,
                                    patientWard,
                                    daysAdmitted,
+                                   patientFinalPayable,
                                    patientCount);
             for (int i = 0; i < patientCount; i++)
             {
@@ -414,11 +424,13 @@ int main()
                      printf("Ward      : %s\n",
                              wardName[patientWard[i] - 1]);
                      printf("Days      : %d\n", daysAdmitted[i]);
-                     printf("Final Payable: LKR %.2f\n", patientFinalPayable[i]);
+
                  }
                  else{
                      printf("Ward      : Not Admitted\n");
                  }
+                 printf("Final Payable: LKR %.2f\n",
+                        patientFinalPayable[i]);
             }
         }
     }
@@ -428,13 +440,7 @@ int main()
     {
         printf("\nInvalid choice. Please enter 1, 2, or 3.\n");
     }
-        //printf("\nDo you want to register another patient? (Y/N): ");
-        //scanf(" %c", &again);
 
-        //if (again == 'N' || again == 'n')
-        //{
-          //  choice = 2;
-        //}
 
 
   } while (choice != 3);
@@ -443,24 +449,3 @@ int main()
 
 return 0;
 }
-    /*printf("\nDo you want to register another patient? (Y/N): ");
-    scanf(" %c", &again);
-
-    if (again == 'N' || again == 'n')
-    {
-        choice = 2;
-    }
-
-    else if (choice == 2)
-    {
-        printf("Exiting system...\n");
-    }
-    else
-    {
-        printf("Invalid choice. Please try again.\n");
-    }
-
-
-
-    return 0;
-}*/
