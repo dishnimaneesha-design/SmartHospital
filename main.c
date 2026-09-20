@@ -241,9 +241,16 @@ int main()
 
     }while (patientSpecialty[patientCount] < 1 ||
             patientSpecialty[patientCount] > 4);
-
+  do{
     printf("Is the patient admitted? (1-Yes, 0-No): ");
     scanf("%d", &isAdmitted[patientCount]);
+    if (isAdmitted[patientCount] != 0 &&
+        isAdmitted[patientCount] != 1){
+            printf("Invalid choice. Please enter 1 for Yes or 0 for No.\n");
+    }
+
+  } while (isAdmitted[patientCount] != 0 &&
+         isAdmitted[patientCount] != 1);
 
     if(isAdmitted[patientCount]==1){
         do{
