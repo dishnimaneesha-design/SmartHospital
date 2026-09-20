@@ -151,6 +151,7 @@ int main()
     int isAdmitted[MAX_PATIENTS];//1 = admitted, 0 = not admitted
     int patientWard[MAX_PATIENTS];
     int daysAdmitted[MAX_PATIENTS];
+    float patientFinalPayable[MAX_PATIENTS];
     int patientCount = 0;
 
     int dailyCapacity[4] = {
@@ -171,6 +172,11 @@ int main()
 
         if (choice == 1)
     {
+        if (patientCount >= MAX_PATIENTS)
+    {
+        printf("\nPatient limit reached. Cannot register more patients.\n");
+        continue;
+    }
 
 
     printf("\nDoctor Specialties:\n");
@@ -289,6 +295,11 @@ int main()
         }
         if (bedFound == 0){
             printf("No beds are currently available in this ward.\n");
+            isAdmitted[patientCount] = 0;
+            patientWard[patientCount] = 0;
+            daysAdmitted[patientCount] = 0;
+
+            printf("Patient admission cancelled because no bed is available.\n");
         }
 
     }else{
@@ -332,6 +343,7 @@ int main()
     );
 
     finalPayable = grossTotal - ageDiscount;
+    patientFinalPayable[patientCount] = finalPayable;
 
     printf("Age Subsidy Discount: LKR %.2f\n", ageDiscount);
     printf("Final Payable Amount: LKR %.2f\n", finalPayable);
@@ -357,8 +369,17 @@ int main()
     printf("\nPatient registered successfully!\n");
     printf("\nPriority sorting function added successfully.\n");
 
+ do{
     printf("\nDo you want to register another patient? (Y/N): ");
     scanf(" %c", &again);
+    if (again != 'Y' && again != 'y' &&
+        again != 'N' && again != 'n')
+    {
+        printf("Invalid choice. Please enter Y or N.\n");
+    }
+
+ } while (again != 'Y' && again != 'y' &&
+         again != 'N' && again != 'n');
 
     if (again == 'N' || again == 'n'){
         choice = 3;
@@ -393,6 +414,7 @@ int main()
                      printf("Ward      : %s\n",
                              wardName[patientWard[i] - 1]);
                      printf("Days      : %d\n", daysAdmitted[i]);
+                     printf("Final Payable: LKR %.2f\n", patientFinalPayable[i]);
                  }
                  else{
                      printf("Ward      : Not Admitted\n");
