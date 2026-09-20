@@ -263,8 +263,16 @@ int main()
                }
         }while (patientWard[patientCount] < 1 ||
                 patientWard[patientCount] > 4);
+
+     do{
         printf("Enter number of admitted days: ");
         scanf("%d", &daysAdmitted[patientCount]);
+        if (daysAdmitted[patientCount] <= 0)
+        {
+             printf("Invalid number of days. Please enter a positive number.\n");
+        }
+
+        } while (daysAdmitted[patientCount] <= 0);
         int wardIndex = patientWard[patientCount] - 1;
         int bedFound = 0;
 
