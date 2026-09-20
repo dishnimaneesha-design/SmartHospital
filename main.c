@@ -330,10 +330,17 @@ int main()
     patientCount++;
     printf("\nPatient registered successfully!\n");
     printf("\nPriority sorting function added successfully.\n");
-    }
 
+    printf("\nDo you want to register another patient? (Y/N): ");
+    scanf(" %c", &again);
+
+    if (again == 'N' || again == 'n'){
+        choice = 3;
+    }
+    }
     else if (choice == 2){
         printf("\n========== REGISTERED PATIENTS ==========\n");
+
         if (patientCount == 0){
             printf("No patients registered yet.\n");
         }
@@ -369,16 +376,20 @@ int main()
     }
 
 
-        printf("\nDo you want to register another patient? (Y/N): ");
-        scanf(" %c", &again);
+    else if (choice != 3)
+    {
+        printf("\nInvalid choice. Please enter 1, 2, or 3.\n");
+    }
+        //printf("\nDo you want to register another patient? (Y/N): ");
+        //scanf(" %c", &again);
 
-        if (again == 'N' || again == 'n')
-        {
-            choice = 2;
-        }
+        //if (again == 'N' || again == 'n')
+        //{
+          //  choice = 2;
+        //}
 
 
-  } while (choice != 2);
+  } while (choice != 3);
 
   printf("Exiting system...\n");
 
