@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #define MAX_PATIENTS 100
 
 float calculateSurcharge(float baseFee, int urgency)
@@ -35,15 +36,53 @@ float calculateAgeDiscount(float grossTotal, int age)
     }
 }
 
-void sortPatientsByPriority(int urgency[], int patientIDs[], int count)
+void sortPatientsByPriority(
+                            int urgency[],
+                            int patientIDs[],
+                            char patientNames[][50],
+                            int patientAges[],
+                            int patientSpecialties[],
+                            int isAdmitted[],
+                            int patientWards[],
+                            int daysAdmitted[],
+                            int count)
 {
     int i, j;
     int tempUrgency;
     int tempID;
+    char tempName[50];
+    int tempAge;
+    int tempSpecialty;
+    int tempAdmitted;
+    int tempWard;
+    int tempDays;
 
     for (i = 0; i < count - 1; i++){
         for (j = 0; j < count - i - 1; j++){
             if (urgency[j] < urgency[j + 1]){
+                strcpy(tempName, patientNames[j]);
+                strcpy(patientNames[j], patientNames[j + 1]);
+                strcpy(patientNames[j + 1], tempName);
+
+                tempAge = patientAges[j];
+                patientAges[j] = patientAges[j + 1];
+                patientAges[j + 1] = tempAge;
+
+                tempSpecialty = patientSpecialties[j];
+                patientSpecialties[j] = patientSpecialties[j + 1];
+                patientSpecialties[j + 1] = tempSpecialty;
+
+                tempAdmitted = isAdmitted[j];
+                isAdmitted[j] = isAdmitted[j + 1];
+                isAdmitted[j + 1] = tempAdmitted;
+
+                tempWard = patientWards[j];
+                patientWards[j] = patientWards[j + 1];
+                patientWards[j + 1] = tempWard;
+
+                tempDays = daysAdmitted[j];
+                daysAdmitted[j] = daysAdmitted[j + 1];
+                daysAdmitted[j + 1] = tempDays;
                 tempUrgency = urgency[j];
                 urgency[j] = urgency[j + 1];
                 urgency[j + 1] = tempUrgency;
@@ -179,8 +218,7 @@ int main()
     scanf("%d", &patientAge[patientCount]);
     printf("Enter urgency level (1-Normal, 2-Urgent, 3-Critical): ");
     scanf("%d", &urgencyLevel[patientCount]);
-    //printf("Enter specialty ID (1-4): ");
-    //scanf("%d", &patientSpecialty[patientCount]);
+
     do{
         printf("Enter specialty ID (1-4): ");
         scanf("%d", &patientSpecialty[patientCount]);
@@ -277,22 +315,6 @@ int main()
            specialtyName[patientSpecialty[patientCount] - 1]);
 
 
-   //float baseFee;
-   //float emergencySurcharge;
-
-   //baseFee = consultationFee[patientSpecialty[patientCount] - 1];
-
-   //emergencySurcharge = calculateSurcharge(
-     //  baseFee,
-     //  urgencyLevel[patientCount]
-   //);
-
-    //printf("Emergency Surcharge: LKR %.2f\n",
-      //     emergencySurcharge);
-
-
-    //printf("Consultation Fee: LKR %.2f\n",
-      //     consultationFee[patientSpecialty[patientCount] - 1]);
 
     printf("Consultation Time: %d minutes\n",
            consultationTime[patientSpecialty[patientCount] - 1]);
@@ -316,6 +338,15 @@ int main()
             printf("No patients registered yet.\n");
         }
         else{
+            sortPatientsByPriority(urgencyLevel,
+                                   patientID,
+                                   patientName,
+                                   patientAge,
+                                   patientSpecialty,
+                                   isAdmitted,
+                                   patientWard,
+                                   daysAdmitted,
+                                   patientCount);
             for (int i = 0; i < patientCount; i++)
             {
                  printf("\nPatient ID : %d\n", patientID[i]);
